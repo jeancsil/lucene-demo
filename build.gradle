@@ -1,0 +1,84 @@
+//Plugins
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: "jacoco"
+apply plugin: 'maven'
+apply plugin: "jetty"
+
+sourceCompatibility = 1.8
+version = '0.1.0-SNAPSHOT'
+group = 'com.demo'
+
+ext['springVersion'] = '4.1.6.RELEASE'
+ext['luceneVersion'] = '5.2.1'
+ext['jerseyVersion'] = '2.20'
+ext['servletVersion'] = '2.5'
+ext['hibernateVersion'] = '4.3.6.Final'
+ext['commonsdbcpVersion'] = '1.4'
+ext['mysqlVersion'] = '5.1.6'
+ext['commonsioVersion'] = '2.4'
+ext['commonscsvVersion'] = '1.1'
+ext['commonslangVersion'] = '3.4'
+ext['mockitoVersion'] = '1.10.19'
+ext['mockitoPowermockVersion'] = '1.6.2'
+ext['log4jVersion'] = '1.2.17'
+ext['jodatimeVersion'] = '2.8.1'
+ext['commonsBeanutilsVersion'] = '1.9.2'
+ext['commonsDigesterVersion'] = '2.1'
+ext['guavaVersion'] = '18.0'
+ext['simmetricsVersion'] = '3.2.0'
+ext['jacksonVersion'] = '2.6.1'
+ext['aspectjVersion'] = '1.8.6'
+ext['swaggerVersion'] = '2.0.1'
+ext['quartzVersion'] = '2.2.1'
+
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
+    compile "javax.servlet:javax.servlet-api:3.0.1"
+
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-aop:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-beans:$springVersion"
+
+    compile "org.apache.lucene:lucene-core:$luceneVersion"
+    compile "org.apache.lucene:lucene-queryparser:$luceneVersion"
+    compile "org.apache.lucene:lucene-suggest:$luceneVersion"
+    compile "org.apache.lucene:lucene-backward-codecs:$luceneVersion"
+
+    compile "commons-io:commons-io:$commonsioVersion"
+    compile "org.apache.commons:commons-csv:$commonscsvVersion"
+    compile "org.apache.commons:commons-lang3:$commonslangVersion"
+
+    testCompile "org.mockito:mockito-all:$mockitoVersion"
+    testCompile 'org.testng:testng:6.9.6'
+
+    compile "log4j:log4j:$log4jVersion"
+    compile "com.google.guava:guava:$guavaVersion"
+
+    compile "org.aspectj:aspectjrt:$aspectjVersion"
+    compile "org.aspectj:aspectjweaver:$aspectjVersion"
+
+    compile "io.springfox:springfox-swagger2:$swaggerVersion"
+    compile "io.springfox:springfox-swagger-ui:$swaggerVersion"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/code-coverage"
+    }
+}
